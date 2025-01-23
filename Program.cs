@@ -19,6 +19,7 @@
             int sum = korean + mathmatics + english;
             float average = (float)sum / 3.0f;
 
+
             //여기서 average = 0; 을 넣는다면 위와 상관없이 average는 0이다.
 
             Console.WriteLine(average);
@@ -28,6 +29,24 @@
         }
     }
 }
+
+//int[] koreans = new int[10];
+
+//for (int i = 0; i < koreans.Length; i++)
+//{
+//  koreans[i] = 1;
+//}
+
+
+//koreans[10] = 1; //영역이 넘어가면 안된다.
+//만들다보니 변수명이 동일한게 여러명이니 이를 정리하기 위해 배열을 한다.
+//대표명[ ] = 값;
+//배열을 할때 반복문을 쓴다.
+
+
+
+
+
 
 #region 필기
 //00P 
