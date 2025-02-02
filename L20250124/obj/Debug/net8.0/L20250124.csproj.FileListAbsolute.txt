@@ -1,0 +1,14 @@
+C:\PMCC#\L20250124\bin\Debug\net8.0\L20250124.exe
+C:\PMCC#\L20250124\bin\Debug\net8.0\L20250124.deps.json
+C:\PMCC#\L20250124\bin\Debug\net8.0\L20250124.runtimeconfig.json
+C:\PMCC#\L20250124\bin\Debug\net8.0\L20250124.dll
+C:\PMCC#\L20250124\bin\Debug\net8.0\L20250124.pdb
+C:\PMCC#\L20250124\obj\Debug\net8.0\L20250124.GeneratedMSBuildEditorConfig.editorconfig
+C:\PMCC#\L20250124\obj\Debug\net8.0\L20250124.AssemblyInfoInputs.cache
+C:\PMCC#\L20250124\obj\Debug\net8.0\L20250124.AssemblyInfo.cs
+C:\PMCC#\L20250124\obj\Debug\net8.0\L20250124.csproj.CoreCompileInputs.cache
+C:\PMCC#\L20250124\obj\Debug\net8.0\L20250124.dll
+C:\PMCC#\L20250124\obj\Debug\net8.0\refint\L20250124.dll
+C:\PMCC#\L20250124\obj\Debug\net8.0\L20250124.pdb
+C:\PMCC#\L20250124\obj\Debug\net8.0\L20250124.genruntimeconfig.cache
+C:\PMCC#\L20250124\obj\Debug\net8.0\ref\L20250124.dll
