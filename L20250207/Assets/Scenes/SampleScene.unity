@@ -1031,7 +1031,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSourceBGM: {fileID: 1436967665}
-  MuteButton: {fileID: 2077004462}
   audioSourceSFX: {fileID: 0}
   bgm: {fileID: 8300000, guid: 54b522eeb124c4b4ab14b269e7d768e1, type: 3}
 --- !u!4 &1969706021
@@ -1132,13 +1131,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1969706019}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1969706020}
+        m_TargetAssemblyTypeName: AudioSourceSample, Assembly-CSharp
+        m_MethodName: mute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
