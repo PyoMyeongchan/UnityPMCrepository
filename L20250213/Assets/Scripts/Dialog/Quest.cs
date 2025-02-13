@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class Quest : MonoBehaviour
 {
     public GameObject dialog;
+    public Image image;
+
     public Text text;
     public Queue<string> stringQueue = new Queue<string>();
     
@@ -31,9 +33,20 @@ public class Quest : MonoBehaviour
 
     IEnumerator talk()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 1; i < 5; i++)
         {
-            text.text = stringQueue.Dequeue();
+            
+            if (stringQueue.Count / 2 == 1)
+            {
+                text.text = stringQueue.Dequeue();
+                
+            }
+            else if (stringQueue.Count / 2 == 0)
+            {
+                text.text = stringQueue.Dequeue();
+
+            }
+
             yield return new WaitForSeconds(5.0F);
         }
         dialog.SetActive(false);
