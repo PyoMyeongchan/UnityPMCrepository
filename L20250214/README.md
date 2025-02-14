@@ -397,6 +397,39 @@ public class GenericSample : MonoBehaviour
     *  에셋을 클릭하면 아래쪽에 번들에 대한 정보가 나오게 되고 New 부분에 등록을 진행합니다.
   * 에셋 번들 빌드 방법
     * Assets 폴더에 Editor 폴더를 생성해 스크립트를 작성합니다.
+
+```cs
+using System.IO;
+using UnityEngine;
+using UnityEditor;
+
+public class AssetBundleBuilds
+{
+    // 에디터에 메뉴를 등록해주는 기능
+    [MenuItem("Asset Bundle/Build")]
+    public static void AssetBundleBuild() 
+    {
+        // 현재 번들의 위치
+         /* string directory = "./Bundle";
+
+         // 해당 디렉토리(코드, 기능만 들어가 있는 폴더)가 존재하지 않는다면?
+         if (!Directory.Exists(directory))
+         { 
+             Directory.CreateDirectory(directory);
+
+         }
+         // 해당 경로에 에셋 번들에 대한 설정과 빌드 플랫폼을 설정해서 빌드를 진행하는 코드
+         BuildPipeline.BuildAssetBundles(directory, BuildAssetBundleOptions.None,BuildTarget.StandaloneWindows);*/
+
+        //번들 폴더 만들어주고 데이터 들어가는지 확인
+        BuildPipeline.BuildAssetBundles("Assets/Bundles", BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows);
+
+        // 에디터에서 보여주는 다이얼로그 창(타이틀, 내용, 확인 메세지)
+        EditorUtility.DisplayDialog("Asset Bundle Build", "Asset Bundle build completed", "complete");
+
+    }
+}
+``` 
    
 ```cs
 using System.IO;
