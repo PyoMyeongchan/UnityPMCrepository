@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+UnityVersion: 6000.0.34f1
+CRC: 2560342634
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: ebf80e55347d3e543dd64d4ca8725dc0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 72af5cfcb408e4d4ebbbffe18b306962
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: a957dbba9f6eee386e5d0bfc363fd923
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 135
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefabs/BlueSphere.prefab
+Dependencies: []
