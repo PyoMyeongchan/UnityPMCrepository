@@ -311,9 +311,10 @@ public class GameManager : TSingleton<GameManager>
 ```
 
 <hr/>
+
 * C# 일반화 프로그래밍(Generic Programming)
- * 데이터 형식에 대한 일반화를 진행하는 기법입니다.
- * <T>를 이용해서 설계하는 방식을 의미합니다.
+  * 데이터 형식에 대한 일반화를 진행하는 기법입니다.
+  * T 를 이용해서 설계하는 방식을 의미합니다.
 
 ```cs
 using UnityEngine;
