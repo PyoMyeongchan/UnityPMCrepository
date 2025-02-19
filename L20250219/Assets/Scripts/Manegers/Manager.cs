@@ -11,6 +11,16 @@ public class Manager : MonoBehaviour
 
     public static Manager Instance;
 
+    private static PoolManager PoolManager = new PoolManager();
+    public static PoolManager Pool 
+    {
+        get
+        {
+            return PoolManager;
+        }
+        
+    }
+
 
     private void Awake()
     {
@@ -31,4 +41,14 @@ public class Manager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    //Resources 폴더가 반드시 필요한 코드
+    public GameObject CreateFromPath(string path)
+    { 
+        return Instantiate(Resources.Load<GameObject>(path));
+    
+    }
+
+
+
 }

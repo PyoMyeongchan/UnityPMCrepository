@@ -67,10 +67,58 @@ public class ObjectPool : IPool
         }
     }
 }
+public class PoolManager
+{
+    public Dictionary<string, IPool> poolDict = new Dictionary<string, IPool>();
+        //key : string
+        //Value : IPool
 
-    public class PoolManager : MonoBehaviour
+    public IPool PoolObject(string path)
     {
+        // 해당 키가 없다면 추가를 진행합니다.
+        if (poolDict.ContainsKey(path) == false)
+        {
+            Add(path);
+        }
 
+        // 큐에 없는 경우 큐 추가
+        if (poolDict[path].pool.Count <= 0)
+        { 
+        
+            AddQ(path);
+        
+        }
 
+        return poolDict[path];
+        //딕셔너리명[키] = 값;
 
     }
+
+    public GameObject Add(string path)
+    { 
+            var obj = new GameObject(path + "Pool");
+            // 전달받은 이름으로 풀 오브젝트 생성
+            
+            ObjectPool objectPool = new ObjectPool();
+            // 오브젝트 풀 생성
+
+            poolDict.Add(path, objectPool);
+            // 경로와 오브젝트 풀을 딕셔너리에 저장
+             
+            objectPool.parent = obj.transform;
+            // 트랜스폼 설정
+
+            return obj;
+    
+    }
+
+    public void AddQ(string path)
+    { 
+            var go = Manager.Instance.CreateFromPath(path);
+            go.transform.parent = poolDict[path].parent;
+            poolDict[path].ObjectReturn(go);
+    
+    }   
+
+
+}

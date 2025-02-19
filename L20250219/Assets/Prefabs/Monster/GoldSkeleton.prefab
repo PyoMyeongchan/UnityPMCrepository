@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 9137904178190238727}
   - component: {fileID: 6246522634212830498}
   m_Layer: 0
-  m_Name: mini simple skeleton demo_02
+  m_Name: GoldSkeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

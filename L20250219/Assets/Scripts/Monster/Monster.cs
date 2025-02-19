@@ -2,16 +2,24 @@ using System;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Animator))]
-public class Monster : MonoBehaviour
+
+public class Monster : Character
 {
-    Animator animator;
+    
     public float monsterSpeed;
     public float rate = 1f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    protected override void Start()
+    { 
+        base.Start();
+    
+    }
+
+
+    //액션 확인 코드
+    public void MonsterSample()
     {
-        animator = GetComponent<Animator>();   
+        Debug.Log("몬스터가 생성되었습니다.");
     }
 
     // Update is called once per frame
@@ -36,12 +44,9 @@ public class Monster : MonoBehaviour
             SetMotionChange("isWalk", true);
 
         }
-
+       
 
     }
 
-    private void SetMotionChange(string motionName, bool parma)
-    {
-        animator.SetBool(motionName,parma);
-    }
+
 }
