@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Goal
   - Dead
+  - Item
+  - jumppad
   layers:
   - Default
   - TransparentFX

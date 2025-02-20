@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     bool onGround = false;
 
     public static string state = "Playing"; // 현재의 상태(플레이 중)
+
+    public GameObject jumppad;
     
 
 
@@ -103,6 +105,7 @@ public class PlayerController : MonoBehaviour
             goJump = false;
         }
 
+        
 
         if (onGround)
         {
@@ -151,6 +154,11 @@ public class PlayerController : MonoBehaviour
         {
             Dead();
         }
+        else if (collision.gameObject.tag == "jumppad")
+        {
+            JumpPPad();            
+        }
+
     }
 
     public void Goal()
@@ -176,6 +184,17 @@ public class PlayerController : MonoBehaviour
     {
         // 속력을 0으로 만들어서 움직이지 못하게
         rbody.linearVelocity = new Vector2(0, 0);
+    }
+
+    public void JumpPPad()
+    {
+      
+        GetComponent<Collider2D>().enabled = true;
+        Vector2 jumpPw = new Vector2(0, jump * 2);
+        rbody.AddForce(jumpPw, ForceMode2D.Impulse);
+
+        
+
     }
 
 }
