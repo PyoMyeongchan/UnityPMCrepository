@@ -153,7 +153,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Goal()
+    public void Goal()
     {
         animator.Play(Enum.GetName(typeof(ANIME_STATE), 3));
         state = "gameclear";
@@ -162,17 +162,17 @@ public class PlayerController : MonoBehaviour
 
     
 
-    private void Dead()
+    public void Dead()
     {
         animator.Play(Enum.GetName(typeof(ANIME_STATE), 4));
         state = "gameover";
         GameStop();
         // 현재 플레이어가 가지고 있는 콜라이더의 활성화를 비활성화로 설정합니다.(더 이상 충돌이 발생하지 않도록)
         GetComponent<Collider2D>().enabled = false;
-        rbody.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+        rbody.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
     }
 
-    private void GameStop()
+    public void GameStop()
     {
         // 속력을 0으로 만들어서 움직이지 못하게
         rbody.linearVelocity = new Vector2(0, 0);
