@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using System;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class PlayerController : MonoBehaviour
     public float speed = 3.0f;
 
     public List<string> animeList = new List<string> { "PlayerDown", "PlayerUP","PlayerLeft","PlayerRight","PlayerDead"};
+    public List<string> damageanimeList = new List<string> { "DamagePlayerDown", "DamagePlayerUP", "DamagePlayerLeft", "DamagePlayerRight" };
 
     string currnet ="";
     string previous = "";
 
+   
     // 가로축과 세로축에 대한 값
     float h;
     float v;
@@ -67,11 +70,13 @@ public class PlayerController : MonoBehaviour
         {
             // 오른쪽
             currnet = animeList[3];
+                       
         }
         else if (z >= 45 && z <= 135)
         {
             // 위쪽
             currnet = animeList[1];
+
         }
         else if (z >= -135 && z <= -45)
         {
@@ -90,6 +95,7 @@ public class PlayerController : MonoBehaviour
             animator.Play(currnet);
         }
 
+
     }
 
     // 일정 주기별로 유지- 움직임이 있을때 사용하자
@@ -104,6 +110,9 @@ public class PlayerController : MonoBehaviour
         // 데미지를 받는 경우
         if (inDamage)
         {
+         
+               
+           
             float value = Mathf.Sin(Time.time * 50);
             if (value > 0)
             {
@@ -118,6 +127,7 @@ public class PlayerController : MonoBehaviour
             // 데미지 받는 동안은 조작 불가
             return;
 
+
         }
 
         rbody.linearVelocity = new Vector2(h,v)*speed;
@@ -129,7 +139,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             GetDamage(collision.gameObject);
-        
+           
+
         }
     }
 
@@ -141,6 +152,7 @@ public class PlayerController : MonoBehaviour
             hp--;
             if (hp > 0)
             {
+                
                 // 이동 정지
                 rbody.linearVelocity = new Vector2(0, 0);
                 Vector3 to = (transform.position - enemy.transform.position).normalized;
