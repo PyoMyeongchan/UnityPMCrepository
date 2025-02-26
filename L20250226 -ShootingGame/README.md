@@ -1,63 +1,275 @@
-* **스크립터블 오브젝트(SO)**
-	* 유니티에서제공해주는 데이터 저장 객체
-	* 게임 데이터를 관리하고, 여러 인스턴스에서 공유할 수 있도록 도와줍니다.
+#### 슈팅게임 만들기
 
-* 장점
-	* 동일한 적(오브젝트)의 정보 등을 여러 오브젝트에서 공유해도 메모리는 한번만 차지합니다.
-	* 데이터와 로직을 분리해서 사용할 수 있습니다.
-	* ex) 캐릭터의 능력치 등을 SO로 관리할 경우 - 스탯에 대한 수정을 쉽게 진행할 수 있습니다.
-	* 런타임 중에 데이터 수정이 가능합니다.
- * 단점
-	* 복잡한 데이터 구조 등에서는 직렬화가 되지 않는 경우가 있어 데이터 손실 발생 위험이 있습니다.
-	* 멀티 스레드 환경에서는 데이터 처리 시 충돌 문제가 우려될 수 있습니다.(이런 경우라면 데이터베이스 활용이 더 좋을 수 있습니다.)
+* 기본설정
+  * 해상도 640 * 960
+  * 카메라 오토그래픽모드
+  * Window - Rendering -Environment - lighting : Color - 255/255/255
+  * Ambient Color(환경광) - 빛이 없어도 물체의 색을 그대로 표현
 
-* 사용 예시
-	* 게임에 대한 기본 설정 값 (게임 난이도, 게임 사운드 설정, 컨트롤 설정)
-	* 행동 패턴이나 능력치 등에 대한 설정
-	* 별도의 데이터베이스를 따로 구현하지 않는다는 전제로 아이템 데이터베이스를 만들기 좋습니다.
+|공식|설명|
+|:------|:------|
+|물체의 이동 공식| P = P0 + vt <br> 미래의 위치 = 현재의 위치 + 속도 * 시간|
+|등가속도 운동| V = V0 + AT <br> 속도 = 현재속도 + 가속도 * 시간|
+|가속도|F = ma <br> 힘 = 질량 * 가속도 |
 
-<hr/>
+1. 플레이어 설정
+  - 플레이어인 큐브 제작
+  - 총알인 캡슐 제작
+  - 플레이어 스크립트 넣기
 
-* 유니티에서 특정 데이터 또는 기능을 구현하기 위해 적합한 자료형을 고르는건 필수입니다.
-* 기본 자료형 이외에 특정 기능, 작업을 진행할 수 있는 데이터 집합체를 자료구조라고 부르겠습니다.(데이터 값의 모임)
+`` 플레이어 움직임 코드
 
-* 자주 활용되는 자료구조
-  * List : 순서대로 저장할 수 있고, 저장 데이터를 추가, 삭제, 검색할 수 있는 변경이 가능한 배열
-  * Dictionary : 키 - 값으로 묶어서 저장할 수 있는 형태(json 파일에서도 확인 가능)
-  * Queue : 자료를 선입선출(FIFO)로 관리할 때 사용할 자료 구조
-  * Stack : 자료를 후입선출(LIFO)로 관리할 때 사용할 자료 구조
-  * HashSet : 데이터의 중복을 전혀 허락하지 않는 경우, 정렬 순서가 필요 없는 경우
+    	using UnityEngine;
 
-* Queue
-  * 제공해주는 기능 : 삽입, 삭제, 첫번째 값 조회 기능
-  * 단점 : 중간에 있는 데이터를 접근하는 부분에선 매우 비효율적입니다.
+	public class PlayerMove : MonoBehaviour
+	{public float speed = 5.0f;
 
-  * 큐를 이용해서 만들기 괜찮은 시스템
 
-<hr/>
+    // Update is called once per frame
+    void Update()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
 
-* 조건 Assets/Scripts/Dialog 폴더 위치에서 작업할 것
+        Vector3 dir = new Vector3(h, v, 0);
 
-  * 대화 시스템
-IEnumerator, StartCrorotine, Queue, List 등을 활용해 구현할 수 있습니다.
+        //transform.translate
 
-  * 만드는 방법
-    * 대화에 대한 데이터 묶음을 따로 가지고 있습니다. (클래스 or 스크럽터블 오브젝트)
+        transform.position += dir * speed * Time.deltaTime;
 
-  * 대화를 시작할 경우
-    * 큐에 해당 데이터들을 순서대로 Enqueue 합니다.
+        // 물체의 이동 공식
+        // P = P0 + vt
+        // 미래의 위치 = 현재의 위치 + 속도 * 시간
 
-  * 버튼이나 키를 눌러 다음 대화로 이동하는 기능을 추가합니다.
-    * 전달받은 큐를 Dequeue합니다.
+        // 등가속도 운동
+        // V = V0 + AT
+        // 속도 = 현재속도 + 가속도 * 시간
 
-  * 화면 상에 UI의 텍스트에 전달받은 값을 적용한다면 대화 기능처럼 보이게 될 것입니다.
+        // 가속도
+        // F = ma
+        // 힘 = 질량 * 가속도
 
-  * 추가적으로 텍스트가 타이핑되는 효과(코루틴 설계)와 함께한다면 더 실감나는 기능을 구현해볼 수 있습니다.
 
-  * 타이핑 텍스트?
-    * 화면상에서 텍스트를 타이핑하듯이 출력하는 것을 의미합니다.
+    }
 
-  * 만드는 방법
-    * 문장 길이만큼 반복해서 UI 텍스트에 단어 하나하나를 +=로 추가합니다.
-    * 1초나 0.1초 마다 한번씩 딜레이를 부여합니다.(코루틴)
 
+``
+
+
+`` 플레이어의 총구 설정 + 플레이어에 빈gameObjects넣고 총구로 설정
+
+	using UnityEngine;
+
+	public class PlayerFire : MonoBehaviour
+	{
+    public GameObject bulletFactory; // 총알 프리팹
+    public GameObject firePosition;  // 총구
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1")) // Left crtl
+        {
+            // 총알 생성
+            GameObject bullet = Instantiate(bulletFactory);
+
+            // 총알 위치 변경
+            bullet.transform.position = firePosition.transform.position;
+        }
+    }
+	}
+``
+
+<hr>
+  
+2. 총알 설정
+
+``총구에서 나올 총알 설정
+
+ 	using UnityEngine;
+
+	public class Bullet : MonoBehaviour	
+	{
+    public float speed = 5.0f;
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position += Vector3.up * speed * Time.deltaTime;
+    }
+
+
+	}
+``
+
+- 총구에 총알이 나오도록 컴포넌트 설정
+
+<hr>
+  
+3. 적 만들기
+  - 슈팅게임인 만큼 적이 필요하다. 위에서 나올 적 만들기작업
+
+`` 적은 플레이어와 충돌하거나 총알에 충돌하면 사라짐 (+ 파티클 작업으로 사라지면서 나오는 효과 넣어줘야한다.)
+
+    using UnityEngine;
+
+	public class Enemy : MonoBehaviour
+	{
+    public float speed = 3.0f;
+    Vector3 dir;
+
+    public GameObject explosinFactory;
+
+    private void Start()
+    {
+  
+        // 적의 방향 설정
+
+        int rand = Random.Range(0, 10);
+
+        // 10개 중에서 3개이므로 약 30% 확률이라고 볼 수 있음
+        if (rand < 3)
+        {
+            var target = GameObject.Find("Player");
+
+            dir = target.transform.position - transform.position;
+
+            dir.Normalize(); // 방향의 크기를 1로 설정합니다.
+                             // 방형 벡터 : Vector3.up, Vector3.down, Vector3.left ...
+
+
+        }
+        else 
+        {
+            dir = Vector3.down;
+        }
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        transform.position += dir * speed * Time.deltaTime;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        
+        GameObject explosion = Instantiate(explosinFactory);
+        explosion.transform.position = transform.position;
+
+        Destroy(other.gameObject);
+        Destroy(gameObject);
+
+
+
+    }
+	}
+``
+<hr>
+
+4. 적의 스포너를 만들어 랜덤하게 맵에 나올 수 있도록 설정
+
+`` 스포너를 맵위로 여러개 설치해서 랜덤하게 나오도록
+
+ 	using UnityEngine;
+
+	public class EnemyManager : MonoBehaviour
+	{    
+    float currentTime;
+    public float createTime = 1.0f;
+    public GameObject enemyFactory;
+    float min = 1, max = 5;
+
+    public void Start()
+    {
+        createTime = Random.Range(min, max);
+    }
+
+
+    private void Update()
+    {
+        // 시간이 흐른다.
+        currentTime += Time.deltaTime;
+
+        // 현재 시간이 일정 시간에 도달한다면 적을 생성
+        if (currentTime >= createTime)
+        { 
+            GameObject enemy = Instantiate(enemyFactory);
+
+            enemy.transform.position = transform.position;
+            // 소환 후 시간을 0으로 리셋합니다.
+            currentTime = 0;
+            createTime = Random.Range(min, max);
+        }
+
+    }
+
+	}
+``
+
+<hr>
+
+5. 게임의 메모리를 위해 충돌하지않고 지나가는 적을 삭제해주는 D-Zone을 만들어야한다!
+
+``D-Zone에 적이나 총알이 충돌할 경우 삭제되도록 설정
+
+	using UnityEngine;
+
+	public class DZone : MonoBehaviour
+	{
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(other.gameObject);
+	
+    }
+	}
+``
+트리거와 충돌로 작용하는것 차이
+-OnTriggerEnter의 함수사용을 위해 트리거를 받는 오브젝트의 콜라이더에서 trigger를 true로 해야함
+-충돌은 아님.
+
+-isKinematic 으로 충돌을 인지
+-레이어 설정을 D-ZONE으로
+
+#### Physics 설정에서 레이어끼리 충돌하지않도록 설정!!
+
+<hr>
+
+5. 뒷배경 설정
+  - material을 생성하여 해당 배경을 설정
+  - Quad를 생성해서 material 넣기
+  - 움직이는 효과를 내기위해 배경을 Scroll하여 연출
+  - 확인한 것 : 머티리얼의 offset을 건드렸더니 이미지가 밀림.
+
+`` 배경의 움직임 표현
+	
+ 	using UnityEngine;
+
+	public class BackGround : MonoBehaviour
+	{
+    public Material backgroundMaterial;
+
+    public float scrollSpeed = 0.2f;
+
+    void Update()
+    {
+        Vector2 dir = Vector2.up;
+
+        backgroundMaterial.mainTextureOffset += dir * scrollSpeed * Time.deltaTime;
+    }
+	}
+ ``
+
+
++Tip.변수 표기법
+
+backMoon - 일반 변수
+
+BackMoon - 클래스 이름, 이벤트, 프로퍼티, 네임스페이스
+
+back_moon - c++
+
+필드 변수가 private일경우 _로 이름을 시작하는 경우가 있
+ 
