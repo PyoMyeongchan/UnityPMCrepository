@@ -6,7 +6,12 @@ public class DZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+
+
+        if (other.gameObject.name.Contains("Bullet") || other.gameObject.name.Contains("Enemy"))
+        { 
+            other.gameObject.SetActive(false);
+        }
 ;
     }
 }

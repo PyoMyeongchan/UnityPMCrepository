@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject explosinFactory;
 
-    private void Start()
+    private void OnEnable() // 활성화 단계에 호출되는 함수
     {
   
         // 적의 방향 설정
@@ -41,24 +41,25 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        
+        ScoreManager.instance.score++;
+
+
         GameObject explosion = Instantiate(explosinFactory);
         explosion.transform.position = transform.position;
 
-        Destroy(other.gameObject);
-        Destroy(gameObject);
-
-        GameObject smobjext = GameObject.Find("ScoreManager");
-        ScoreManager sm = smobjext.GetComponent<ScoreManager>();
-        sm.currentscore++;
-        sm.currentScoreText.text = "현재점수 : " + sm.currentscore;
-        if (sm.currentscore > sm.bestscore)
-        { 
-            sm.bestscore = sm.currentscore;
-            sm.bestScoreText.text = "최고점수 : " + sm.bestscore;
-            PlayerPrefs.SetInt("BestScore", sm.bestscore);
+        // 부딪힌 물체의 이름이 bullet이 포함된다면
+        // 오브젝트 풀로 만들어질 이름은 Bullet
+        if (other.gameObject.name.Contains("Bullet"))
+        {
+            other.gameObject.SetActive(false);
 
         }
+        else
+        { 
+            Destroy(other.gameObject);
+        }
+
+        gameObject.SetActive(false); // 적도 비활성화
 
 
     }
