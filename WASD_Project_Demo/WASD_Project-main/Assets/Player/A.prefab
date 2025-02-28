@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6913865478974349217}
   - component: {fileID: 8164313883688329073}
   - component: {fileID: 774145783621065119}
+  - component: {fileID: -6706429193136172278}
   m_Layer: 6
   m_Name: A
   m_TagString: Player
@@ -194,6 +195,10 @@ MonoBehaviour:
   maxSpeed: 4
   jumpPw: 5
   jumpcount: 1
+  mySFX: {fileID: 0}
+  jumpSound: {fileID: 0}
+  damagedSound: {fileID: 0}
+  gameoverSound: {fileID: 0}
 --- !u!114 &774145783621065119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,6 +215,21 @@ MonoBehaviour:
   bowPrefab: {fileID: 3658326095813116536, guid: 77a9796d09dc6a044a72134c154d34ff, type: 3}
   arrowPrefab: {fileID: 3382994896179087292, guid: 05573dc8b4f59284d8107af782d1e05b, type: 3}
   pos: {fileID: 7935950479793488336}
+  mySFX: {fileID: 0}
+  attackSound: {fileID: 0}
+--- !u!114 &-6706429193136172278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167561974687567706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb54a82e9e558a8458887aca3102f93b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Item: {fileID: 0}
 --- !u!1 &6756347140998412003
 GameObject:
   m_ObjectHideFlags: 0

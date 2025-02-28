@@ -19,7 +19,7 @@ public class APlayerController : MonoBehaviour
     Vector2 savePoint;
     public static string state = "Playing";
     bool isUndamage;
-    public int playerHp = 3;
+    public static float playerHp = 3;
 
     public AudioSource mySFX;
     public AudioClip jumpSound;
@@ -226,6 +226,7 @@ public class APlayerController : MonoBehaviour
         GameStop();
         rbody.AddForce(new Vector2(0, 7), ForceMode2D.Impulse);
         GetComponent<Collider2D>().enabled = false;
+        playerHp = 0;
         yield return new WaitForSeconds(duration);
         state = "Playing";
         GetComponent<Collider2D>().enabled = true;
