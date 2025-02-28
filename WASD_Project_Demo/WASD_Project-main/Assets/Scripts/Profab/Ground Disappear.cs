@@ -1,26 +1,23 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class DoorOpen : MonoBehaviour
+public class GroundDisappear : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-  
         if (collision.gameObject.tag == "Player")
         {
-            Invoke("NextStage", 3f);
-
-
+            Invoke("Disappear", 0.5f);
+        
         }
     }
 
-    private void NextStage()
-    {
-        SceneManager.LoadScene("Dscene");
+    void Disappear()
+    { 
+        Destroy(gameObject);
+    
     }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

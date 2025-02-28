@@ -140,6 +140,37 @@ public class APlayerController : MonoBehaviour
         {
             rbody.linearVelocity = new Vector2(maxSpeed * (-1), rbody.linearVelocityY);
         }
+
+
+        Vector2 frontVec = new Vector2(rbody.position.x, rbody.position.y);
+        Vector2 rayDirection = Vector2.up;
+
+       
+        if (axisH < 0)
+        {
+            frontVec.x = rbody.position.x - 0.5f;  // 왼쪽에 레이캐스트
+        }
+        // 오른쪽을 볼 때 (nextMove > 0), 오른쪽에 레이 쏘기
+        else if (axisH > 0)
+        {
+            frontVec.x = rbody.position.x + 0.5f;  // 오른쪽에 레이캐스트
+        }
+
+        Debug.DrawRay(frontVec, rayDirection, new Color(0, 1, 0));  // 레이의 방향을 설정하여 그려줌
+
+        // Raycast: 레이의 방향에 맞춰 낭떠러지를 감지 (위치에서 아래로 레이를 쏘는 것)
+        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, rayDirection, 2f, LayerMask.GetMask("ground"));
+
+        if (rayHit.collider == null)
+        {
+ 
+
+        }
+        else if(rayHit.collider.tag == "Ground")
+        {
+            Debug.Log("벽감지");
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

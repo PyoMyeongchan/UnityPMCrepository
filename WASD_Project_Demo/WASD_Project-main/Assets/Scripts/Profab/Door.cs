@@ -19,7 +19,7 @@ public class Door : MonoBehaviour
             {
                 OpenSound();
                 ItemKeeper.haskey--;
-               Invoke("Destroydoor",1f);
+               Invoke("Destroydoor",2f);
                 doorOpen.SetActive(true);
                 
             }
